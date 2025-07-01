@@ -178,9 +178,14 @@ button:hover {
 
   function sayYes() {
     const music = document.getElementById("bgMusic");
+    music.muted = false;
     music.currentTime = 0;
-    music.play();
+    music.play().catch(e => {
+      console.warn("Music couldn't autoplay:", e);
+    });
+
     triggerConfetti();
+
     document.body.innerHTML = `
       <div class="container fade-in" style="background:#e8f5fe;">
         <h1>Yessss! 💙</h1>
