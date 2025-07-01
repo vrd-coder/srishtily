@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>For You, Srishti 💘</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -19,13 +19,11 @@
       align-items: center;
       position: relative;
     }
-
     @keyframes gradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     .container {
       background: white;
       padding: 30px;
@@ -36,34 +34,35 @@
       max-width: 400px;
       position: relative;
     }
-
     h1 {
       font-size: 1.9em;
       color: #d63384;
       margin-bottom: 10px;
     }
-
     .gif {
       width: 100%;
       border-radius: 15px;
       margin: 15px 0;
     }
-
+    .caption {
+      font-size: 0.9em;
+      color: #888;
+      margin-top: -10px;
+      margin-bottom: 15px;
+    }
     #textArea {
       font-size: 1.1em;
       color: #555;
       min-height: 3em;
       margin-bottom: 20px;
     }
-
     .buttons {
       display: flex;
       justify-content: center;
       gap: 15px;
       margin-top: 10px;
-      position: relative;
+      flex-wrap: wrap;
     }
-
     button {
       padding: 10px 20px;
       border: none;
@@ -74,44 +73,36 @@
       transition: 0.3s ease;
       color: white;
     }
-
     #yesBtn {
       background: #ff69b4;
     }
-
     #yesBtn:hover {
       background: #f54d9b;
     }
-
     #noBtn {
       background: #90caf9;
-      position: absolute;
+      position: relative;
     }
-
     #noBtn:hover {
       background: #64b5f6;
     }
-
     .fade-in {
       animation: fadeIn 1s ease forwards;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
     }
-
     .emoji {
       position: absolute;
-      font-size: 1.5rem;
-      animation: floatUp 4s linear infinite;
-      opacity: 0.8;
-      pointer-events: none;
+      font-size: 1.2rem;
+      animation: float 6s infinite ease-in-out;
+      opacity: 0.6;
     }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-120vh); opacity: 0; }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
     }
   </style>
 </head>
@@ -119,6 +110,7 @@
   <div class="container" id="mainBox">
     <h1>For You, Srishti 💘</h1>
     <img class="gif" src="sakuta-mai.gif" alt="confession gif" />
+    <div class="caption">(This moment reminds me of us 🫶🏻)</div>
     <div id="textArea">Hey Srishti... I’ve been meaning to tell you something 💭</div>
     <div class="buttons">
       <button id="yesBtn" onclick="sayYes()">Of courseee 🤝</button>
@@ -126,33 +118,51 @@
     </div>
   </div>
 
-  <!-- Background Music -->
   <audio id="bgMusic" src="raatan.mp3" preload="auto"></audio>
-
-  <!-- Confetti CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
   <script>
-    const noBtn = document.getElementById("noBtn");
-    const music = document.getElementById("bgMusic");
+    const textArea = document.getElementById("textArea");
+    const messages = [
+      "Hey Srishti... I’ve been meaning to tell you something 💭",
+      "You’re like comfort, chaos & charm wrapped in one 🧸✨",
+      "You’ve unknowingly become the best part of my day 😌",
+      "Will you be my bestest friend for life? 🫶🏻"
+    ];
 
+    let i = 0, j = 0;
+    function typeLine() {
+      if (i < messages.length) {
+        if (j < messages[i].length) {
+          textArea.textContent += messages[i].charAt(j);
+          j++;
+          setTimeout(typeLine, 40);
+        } else {
+          i++;
+          j = 0;
+          setTimeout(() => {
+            textArea.textContent = "";
+            typeLine();
+          }, 1200);
+        }
+      }
+    }
+    typeLine();
+
+    const noBtn = document.getElementById("noBtn");
     function moveNo() {
       const container = document.querySelector('.container');
-      const btnWidth = noBtn.offsetWidth;
-      const btnHeight = noBtn.offsetHeight;
-
-      const maxX = container.clientWidth - btnWidth - 20;
-      const maxY = container.clientHeight - btnHeight - 20;
-
+      const maxX = container.offsetWidth - noBtn.offsetWidth - 30;
+      const maxY = container.offsetHeight - noBtn.offsetHeight - 30;
       const x = Math.random() * maxX;
       const y = Math.random() * maxY;
-
+      noBtn.style.position = 'absolute';
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
     }
 
     function sayYes() {
-      // Try playing music
+      const music = document.getElementById("bgMusic");
       music.play().catch(() => {
         const btn = document.createElement("button");
         btn.textContent = "🔊 Tap to play music";
@@ -160,7 +170,6 @@
         btn.style.bottom = "20px";
         btn.style.left = "50%";
         btn.style.transform = "translateX(-50%)";
-        btn.style.zIndex = "999";
         btn.style.padding = "12px 20px";
         btn.style.border = "none";
         btn.style.background = "#ff4081";
@@ -173,14 +182,8 @@
         document.body.appendChild(btn);
       });
 
-      // Confetti
-      confetti({
-        particleCount: 200,
-        spread: 100,
-        origin: { y: 0.6 }
-      });
+      confetti({ particleCount: 250, spread: 70, origin: { y: 0.6 } });
 
-      // New screen
       document.body.innerHTML = `
         <div class="container fade-in" style="background:#fce4ec;">
           <h1>Yesssss 💖</h1>
@@ -190,26 +193,23 @@
           <button onclick="window.open('https://www.instagram.com/vrd.cfg?igsh=MWI0dm0xcDI4ZzVueA==', '_blank')" style="margin-top: 20px; background: #e1306c; padding: 12px 20px; border: none; color: white; border-radius: 30px; font-weight: bold;">
             Take me to Instagram 💗
           </button>
-        </div>
-      `;
-
-      // Start emoji float
-      startEmojis();
+        </div>`;
     }
 
-    function startEmojis() {
-      const emojis = ['🫶🏻','💖','✨','💕','🌸'];
-      setInterval(() => {
+    // Floating cute emoji particles
+    const emojis = ["🫶🏻", "💖", "✨", "🌸", "🥺"];
+    function spawnEmojis() {
+      for (let i = 0; i < 20; i++) {
         const emoji = document.createElement('div');
         emoji.className = 'emoji';
         emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
         emoji.style.left = Math.random() * 100 + 'vw';
-        emoji.style.top = '100vh';
-        emoji.style.fontSize = Math.random() * 10 + 16 + 'px';
+        emoji.style.top = Math.random() * 100 + 'vh';
+        emoji.style.animationDuration = (Math.random() * 5 + 5) + 's';
         document.body.appendChild(emoji);
-        setTimeout(() => emoji.remove(), 4000);
-      }, 300);
+      }
     }
+    spawnEmojis();
   </script>
 </body>
 </html>
