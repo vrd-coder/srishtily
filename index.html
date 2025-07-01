@@ -92,7 +92,7 @@
     <img class="gif" src="sakuta-mai.gif" alt="confession gif" />
     <div id="textArea"></div>
     <div class="buttons">
-      <button id="yesBtn" onclick="sayYes()">Of courseee 🤝</button>
+      <button id="yesBtn">Of courseee 🤝</button>
       <button id="noBtn" onclick="moveNo()">No 🥺</button>
     </div>
   </div>
@@ -100,37 +100,29 @@
   <!-- Audio -->
   <audio id="bgMusic" src="raatan.mp3" preload="auto"></audio>
 
-  <!-- Confetti -->
+  <!-- Confetti CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
   <script>
+    const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
+    const bgMusic = document.getElementById("bgMusic");
 
-    function moveNo() {
-      const container = document.querySelector('.container');
-      const maxX = container.offsetWidth - noBtn.offsetWidth - 30;
-      const maxY = container.offsetHeight - noBtn.offsetHeight - 30;
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
-      noBtn.style.position = 'absolute';
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top = `${y}px`;
-    }
-
-    function sayYes() {
-      const music = document.getElementById("bgMusic");
-      music.play().catch(() => {
+    yesBtn.onclick = () => {
+      // Play music only on user interaction
+      bgMusic.play().catch(() => {
         const btn = document.createElement("button");
         btn.textContent = "🔊 Tap to play music";
         btn.style = "position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:12px 20px;background:#ff4081;color:white;border:none;border-radius:25px;font-weight:600;z-index:999;";
         btn.onclick = () => {
-          music.play();
+          bgMusic.play();
           btn.remove();
         };
         document.body.appendChild(btn);
       });
 
-      confetti({ particleCount: 300, spread: 100, origin: { y: 0.6 } });
+      // Confetti
+      confetti({ particleCount: 250, spread: 120, origin: { y: 0.6 } });
 
       document.body.innerHTML = `
         <div class="container fade-in" style="background:#fce4ec;">
@@ -143,8 +135,20 @@
           </button>
         </div>
       `;
+    };
+
+    function moveNo() {
+      const container = document.querySelector('.container');
+      const maxX = container.offsetWidth - noBtn.offsetWidth - 30;
+      const maxY = container.offsetHeight - noBtn.offsetHeight - 30;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
     }
 
+    // Typing animation
     const messages = [
       "Hey Srishti 👀",
       "I’ve met a lot of people... but your vibe? It's just different 💫",
@@ -159,7 +163,6 @@
       let i = 0;
       const p = document.createElement("p");
       textArea.appendChild(p);
-
       function typeChar() {
         if (i < msg.length) {
           p.textContent += msg.charAt(i);
@@ -169,7 +172,6 @@
           callback();
         }
       }
-
       typeChar();
     }
 
