@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>For You, Srishti 💫</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
@@ -10,209 +9,160 @@
       margin: 0;
       padding: 20px;
       font-family: 'Poppins', sans-serif;
-      color: #2c3e50;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      flex-direction: column;
       background: linear-gradient(-45deg, #e3f2fd, #fce4ec, #f3e5f5, #e1f5fe);
       background-size: 400% 400%;
       animation: gradientBG 10s ease infinite;
-    }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .container {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
-      max-width: 460px;
-      width: 100%;
-      padding: 30px;
-      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
-    }
-
-    h1 {
-      font-weight: 600;
-      font-size: 2.2em;
-      margin-bottom: 10px;
-      color: #1e88e5;
-    }
-
-    p {
-      font-size: 1.1em;
-      margin-bottom: 15px;
-      min-height: 1.5em;
-      white-space: pre-wrap;
-    }
-
-    .gif {
-      width: 100%;
-      max-height: 250px;
-      object-fit: cover;
-      border-radius: 15px;
-      margin: 15px 0;
-    }
-
-    .buttons {
-      margin-top: 20px;
-      position: relative;
-      height: 60px;
-    }
-
-    button {
-      background: #42a5f5;
-      border: none;
-      padding: 12px 25px;
-      margin: 0 10px;
-      font-size: 1.1em;
-      border-radius: 30px;
-      cursor: pointer;
-      color: white;
-      font-weight: 600;
-      box-shadow: 0 4px 8px rgba(66, 165, 245, 0.5);
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-
-    button:hover {
-      background: #1e88e5;
-      transform: scale(1.05);
-    }
-
-    #noBtn {
-      background: #90caf9;
-    }
-
-    #noBtn:hover {
-      background: #64b5f6;
-    }
-
-    .fade-in {
-      animation: fadeIn 1s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .sparkles {
-      position: absolute;
-      top: 0; left: 0;
-      pointer-events: none;
-      width: 100%;
-      height: 100%;
       overflow: hidden;
-      z-index: 999;
-    }
+    }@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-    .sparkle {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: radial-gradient(circle, #ffffff, transparent);
-      animation: sparkleAnim 1.5s linear infinite;
-      opacity: 0.8;
-      border-radius: 50%;
-    }
+.container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+  max-width: 460px;
+  width: 100%;
+  padding: 30px;
+  text-align: center;
+}
 
-    @keyframes sparkleAnim {
-      from { transform: translateY(0) scale(1); opacity: 1; }
-      to { transform: translateY(-100vh) scale(0.5); opacity: 0; }
-    }
+h1 {
+  font-weight: 600;
+  font-size: 2.2em;
+  margin-bottom: 10px;
+  color: #1e88e5;
+}
 
-    @media (min-width: 768px) {
-      .container {
-        max-width: 600px;
-        padding: 40px;
-      }
+p {
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  min-height: 1.5em;
+  white-space: pre-wrap;
+}
 
-      h1 {
-        font-size: 2.5em;
-      }
+.gif-frame {
+  background: #fff;
+  border: 2px solid #f8bbd0;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 15px auto;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
 
-      p {
-        font-size: 1.2em;
-      }
+.gif {
+  max-width: 100%;
+  border-radius: 10px;
+}
 
-      button {
-        font-size: 1.2em;
-        padding: 14px 30px;
-      }
+.caption {
+  font-size: 0.9em;
+  color: #ec407a;
+  margin-top: 5px;
+}
 
-      .gif {
-        max-height: 300px;
-      }
-    }
+.buttons {
+  margin-top: 20px;
+  position: relative;
+}
+
+button {
+  background: #42a5f5;
+  border: none;
+  padding: 12px 25px;
+  margin: 0 10px;
+  font-size: 1.1em;
+  border-radius: 30px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(66, 165, 245, 0.5);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: #1e88e5;
+  transform: scale(1.05);
+}
+
+#noBtn {
+  background: #90caf9;
+}
+
+#noBtn:hover {
+  background: #64b5f6;
+}
+
+.emoji-float {
+  position: absolute;
+  animation: floatEmoji 10s linear infinite;
+  font-size: 22px;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+@keyframes floatEmoji {
+  0% { transform: translateY(100vh) rotate(0deg); }
+  100% { transform: translateY(-100vh) rotate(360deg); }
+}
+
   </style>
 </head>
-<body>
-
-  <!-- 🎵 Background Music -->
-  <audio autoplay loop>
-    <source src="raatan.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- 💌 Confession Box -->
-  <div class="container" id="confessBox">
+<body>  <div class="container" id="confessBox">
     <h1>For You, Srishti 💫</h1>
-    <img class="gif" src="https://media.tenor.com/M2yPQF4g7ykAAAAC/sakuta-and-mai.gif" alt="Sakuta and Mai gif" />
+    <div class="gif-frame">
+      <img class="gif" src="sakuta-mai.gif" alt="Gif">
+      <div class="caption">that look when i realized you're my fav person 💌</div>
+    </div><p id="line1"></p>
+<p id="line2"></p>
+<p id="line3"></p>
+<p id="line4"></p>
 
-    <p id="line1"></p>
-    <p id="line2"></p>
-    <p id="line3"></p>
-    <p id="line4"></p>
+<div class="buttons">
+  <button onclick="sayYes()">Of courseee 🤝</button>
+  <button id="noBtn" onclick="handleNo(event)">No 🥺</button>
+</div>
 
-    <div class="buttons">
-      <button onclick="sayYes()">Of courseee 🤝</button>
-      <button id="noBtn" onclick="handleNo(event)">No 😏</button>
-    </div>
-  </div>
-
-  <!-- 🎉 Confetti Script -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-
-  <script>
-    const noBtn = document.getElementById("noBtn");
+  </div>  <script>
+    const typeSound = new Audio('type.mp3');
+    const clickSound = new Audio('click.mp3');
+    const bgMusic = new Audio('raatan.mp3');
+    bgMusic.loop = true;
 
     function sayYes() {
+      clickSound.play();
+      bgMusic.play();
+
       document.body.innerHTML = `
         <div class="container fade-in" style="background:#e8f5fe;">
           <h1>Yessss! 💙</h1>
-          <img class="gif" src="https://media.tenor.com/7fHJmvhNz0QAAAAC/anime-anime-hug.gif" alt="Anime hug gif" />
+          <div class="gif-frame">
+            <img class="gif" src="anime-hug.gif" alt="Anime hug gif" />
+            <div class="caption">locked in forever 🤝💗</div>
+          </div>
           <p>Srishti, you're now officially my forever best friend 🫶🏻</p>
           <p>No matter what happens, you'll always have me — hype squad, safe space, and secret keeper 💌</p>
-          <button onclick="window.open('https://www.instagram.com/vrd.cfg?igsh=MWI0dm0xcDI4ZzVueA==', '_blank')" style="
-            margin-top: 20px;
-            background: #e1306c;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1em;
-            border-radius: 30px;
-            cursor: pointer;
-            color: white;
-            font-weight: 600;
-            box-shadow: 0 4px 8px rgba(225, 48, 108, 0.4);
-            transition: transform 0.2s ease;
-          ">
+          <button onclick="window.open('https://www.instagram.com/vrd.cfg?igsh=MWI0dm0xcDI4ZzVueA==', '_blank')" style="margin-top: 20px; background: #e1306c;">
             Take me to Instagram 💗
           </button>
         </div>
       `;
-      createSparkles();
-      confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
     }
 
     function handleNo(e) {
+      clickSound.play();
+      const noBtn = document.getElementById("noBtn");
       const container = document.querySelector('.container');
-      const maxX = container.offsetWidth - noBtn.offsetWidth - 20;
-      const maxY = container.offsetHeight - noBtn.offsetHeight - 20;
+      const maxX = container.clientWidth - noBtn.offsetWidth;
+      const maxY = container.clientHeight - noBtn.offsetHeight;
       const x = Math.random() * maxX;
       const y = Math.random() * maxY;
       noBtn.style.position = 'absolute';
@@ -220,51 +170,52 @@
       noBtn.style.top = `${y}px`;
     }
 
-    function createSparkles() {
-      const sparkleContainer = document.createElement('div');
-      sparkleContainer.className = 'sparkles';
-      for (let i = 0; i < 50; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        sparkle.style.left = Math.random() * 100 + 'vw';
-        sparkle.style.top = Math.random() * 100 + 'vh';
-        sparkle.style.animationDelay = Math.random() * 2 + 's';
-        sparkleContainer.appendChild(sparkle);
+    function floatEmojis() {
+      const emojis = ['🌸','💖','🧸','✨','🥺','🎀'];
+      for (let i = 0; i < 25; i++) {
+        const emoji = document.createElement('div');
+        emoji.className = 'emoji-float';
+        emoji.style.left = Math.random() * 100 + 'vw';
+        emoji.style.animationDuration = (8 + Math.random() * 4) + 's';
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        document.body.appendChild(emoji);
       }
-      document.body.appendChild(sparkleContainer);
+    }
+
+    function typeMessage(id, text, callback) {
+      const el = document.getElementById(id);
+      let i = 0;
+      el.textContent = '';
+      function type() {
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          typeSound.currentTime = 0;
+          typeSound.play();
+          i++;
+          setTimeout(type, 60);
+        } else if (callback) callback();
+      }
+      type();
     }
 
     window.onload = () => {
+      floatEmojis();
       const messages = [
         {id: 'line1', text: 'Hey Srishti 👀'},
         {id: 'line2', text: "I’ve met a lot of people... but your vibe? It's just different. Pure, chaotic, and beautiful all at once 💫"},
         {id: 'line3', text: "You’ve unknowingly become one of the most special parts of my life. And honestly? I don’t even wanna imagine my days without you 🥺"},
         {id: 'line4', text: "So... will you be my bestest friend for life? Like forever-ever? 🫶🏻😌"}
       ];
-
       let current = 0;
-
-      function typeNext() {
-        if (current >= messages.length) return;
-        const msg = messages[current];
-        const element = document.getElementById(msg.id);
-        element.textContent = '';
-        let i = 0;
-        function typeChar() {
-          if (i < msg.text.length) {
-            element.textContent += msg.text.charAt(i);
-            i++;
-            setTimeout(typeChar, 50);
-          } else {
+      function next() {
+        if (current < messages.length) {
+          typeMessage(messages[current].id, messages[current].text, () => {
             current++;
-            setTimeout(typeNext, 300);
-          }
+            setTimeout(next, 500);
+          });
         }
-        typeChar();
       }
-
-      typeNext();
+      next();
     };
-  </script>
-</body>
+  </script></body>
 </html>
