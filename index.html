@@ -2,27 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-  <title>For You, Srishti 💫</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You, Srishti 💘</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(-45deg, #e3f2fd, #fce4ec, #f3e5f5, #e1f5fe);
+      background: linear-gradient(135deg, #fce4ec, #e1f5fe);
       background-size: 400% 400%;
-      animation: gradientBG 12s ease infinite;
-      color: #2c3e50;
-      min-height: 100vh;
-      overflow-x: hidden;
+      animation: gradient 15s ease infinite;
+      height: 100vh;
+      overflow: hidden;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 20px;
+      align-items: center;
+      position: relative;
     }
 
-    @keyframes gradientBG {
+    @keyframes gradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
@@ -30,69 +28,64 @@
 
     .container {
       background: white;
-      padding: 30px 20px;
-      border-radius: 20px;
-      max-width: 460px;
-      width: 100%;
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
       position: relative;
-      max-height: 90vh;
-      overflow-y: auto;
     }
 
     h1 {
-      color: #1e88e5;
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1.05em;
+      font-size: 1.9em;
+      color: #d63384;
       margin-bottom: 10px;
     }
 
     .gif {
       width: 100%;
       border-radius: 15px;
-      margin: 10px 0;
-      object-fit: cover;
+      margin: 15px 0;
     }
 
-    .caption {
-      font-size: 0.9em;
-      color: #666;
-      margin-bottom: 15px;
-      font-style: italic;
+    #textArea {
+      font-size: 1.1em;
+      color: #555;
+      min-height: 3em;
+      margin-bottom: 20px;
     }
 
     .buttons {
-      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
       position: relative;
-      height: 60px;
     }
 
     button {
-      background: #42a5f5;
+      padding: 10px 20px;
       border: none;
-      padding: 12px 25px;
-      margin: 0 10px;
-      font-size: 1em;
       border-radius: 30px;
-      cursor: pointer;
-      color: white;
       font-weight: 600;
-      box-shadow: 0 4px 8px rgba(66, 165, 245, 0.5);
+      font-size: 1em;
+      cursor: pointer;
       transition: 0.3s ease;
+      color: white;
     }
 
-    button:hover {
-      background: #1e88e5;
-      transform: scale(1.05);
+    #yesBtn {
+      background: #ff69b4;
+    }
+
+    #yesBtn:hover {
+      background: #f54d9b;
     }
 
     #noBtn {
       background: #90caf9;
+      position: absolute;
     }
 
     #noBtn:hover {
@@ -104,158 +97,119 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    .floating-emojis span {
-      position: fixed;
-      font-size: 20px;
-      animation: float 10s linear infinite;
-      opacity: 0.5;
-      z-index: 1;
+    .emoji {
+      position: absolute;
+      font-size: 1.5rem;
+      animation: floatUp 4s linear infinite;
+      opacity: 0.8;
+      pointer-events: none;
     }
 
-    @keyframes float {
-      0% {
-        transform: translateY(100vh) translateX(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) translateX(30px);
-        opacity: 0;
-      }
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-120vh); opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <div class="container" id="confessBox">
-    <h1>For You, Srishti 💫</h1>
-    <img class="gif" src="sakuta-mai.gif" alt="Sakuta and Mai gif" />
-    <div class="caption">“This moment felt like us” 🥺</div>
-
-    <p id="line1"></p>
-    <p id="line2"></p>
-    <p id="line3"></p>
-    <p id="line4"></p>
-
+  <div class="container" id="mainBox">
+    <h1>For You, Srishti 💘</h1>
+    <img class="gif" src="sakuta-mai.gif" alt="confession gif" />
+    <div id="textArea">Hey Srishti... I’ve been meaning to tell you something 💭</div>
     <div class="buttons">
-      <button onclick="sayYes()">Of courseee 🤝</button>
-      <button id="noBtn" onclick="handleNo(event)">No 🥺</button>
+      <button id="yesBtn" onclick="sayYes()">Of courseee 🤝</button>
+      <button id="noBtn" onclick="moveNo()">No 🥺</button>
     </div>
   </div>
 
+  <!-- Background Music -->
   <audio id="bgMusic" src="raatan.mp3" preload="auto"></audio>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
-  <!-- Floating emojis -->
-  <div class="floating-emojis" id="floatContainer"></div>
+  <!-- Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
   <script>
     const noBtn = document.getElementById("noBtn");
-    const bgMusic = document.getElementById("bgMusic");
+    const music = document.getElementById("bgMusic");
+
+    function moveNo() {
+      const container = document.querySelector('.container');
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+
+      const maxX = container.clientWidth - btnWidth - 20;
+      const maxY = container.clientHeight - btnHeight - 20;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
 
     function sayYes() {
-      bgMusic.play().catch(() => {
+      // Try playing music
+      music.play().catch(() => {
         const btn = document.createElement("button");
-        btn.innerText = "Tap to play music 🔊";
+        btn.textContent = "🔊 Tap to play music";
         btn.style.position = "fixed";
         btn.style.bottom = "20px";
         btn.style.left = "50%";
         btn.style.transform = "translateX(-50%)";
         btn.style.zIndex = "999";
+        btn.style.padding = "12px 20px";
+        btn.style.border = "none";
+        btn.style.background = "#ff4081";
+        btn.style.color = "white";
+        btn.style.borderRadius = "25px";
         btn.onclick = () => {
-          bgMusic.play();
+          music.play();
           btn.remove();
         };
         document.body.appendChild(btn);
       });
 
-      confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
+      // Confetti
+      confetti({
+        particleCount: 200,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
 
+      // New screen
       document.body.innerHTML = `
-        <div class="container fade-in" style="background:#e8f5fe;">
-          <h1>Yessss! 💙</h1>
-          <img class="gif" src="anime-hug.gif" alt="hug" />
+        <div class="container fade-in" style="background:#fce4ec;">
+          <h1>Yesssss 💖</h1>
+          <img class="gif" src="anime-hug.gif" alt="hug gif" />
           <p>Srishti, you're now officially my forever best friend 🫶🏻</p>
-          <p>No matter what happens, you'll always have me — hype squad, safe space, and secret keeper 💌</p>
-          <button onclick="window.open('https://www.instagram.com/vrd.cfg?igsh=MWI0dm0xcDI4ZzVueA==', '_blank')" style="
-            margin-top: 20px;
-            background: #e1306c;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1em;
-            border-radius: 30px;
-            cursor: pointer;
-            color: white;
-            font-weight: 600;
-            box-shadow: 0 4px 8px rgba(225, 48, 108, 0.4);
-          ">Take me to Instagram 💗</button>
+          <p>No matter what happens, you’ll always have me — hype squad, safe space, secret keeper 💌</p>
+          <button onclick="window.open('https://www.instagram.com/vrd.cfg?igsh=MWI0dm0xcDI4ZzVueA==', '_blank')" style="margin-top: 20px; background: #e1306c; padding: 12px 20px; border: none; color: white; border-radius: 30px; font-weight: bold;">
+            Take me to Instagram 💗
+          </button>
         </div>
       `;
+
+      // Start emoji float
+      startEmojis();
     }
 
-    function handleNo(e) {
-      const container = document.querySelector('.container');
-      const maxX = container.offsetWidth - noBtn.offsetWidth - 40;
-      const maxY = container.offsetHeight - noBtn.offsetHeight - 40;
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
-      noBtn.style.position = 'absolute';
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top = `${y}px`;
-    }
-
-    function floatingEmojis() {
-      const emojis = ['💖','💫','🩷','✨','🌸','💕','🫶🏻'];
-      const container = document.getElementById("floatContainer");
+    function startEmojis() {
+      const emojis = ['🫶🏻','💖','✨','💕','🌸'];
       setInterval(() => {
-        const emoji = document.createElement("span");
-        emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-        emoji.style.left = Math.random() * 100 + "vw";
-        emoji.style.top = "100vh";
-        emoji.style.animationDuration = (5 + Math.random() * 5) + "s";
-        container.appendChild(emoji);
-        setTimeout(() => emoji.remove(), 10000);
-      }, 500);
+        const emoji = document.createElement('div');
+        emoji.className = 'emoji';
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = Math.random() * 100 + 'vw';
+        emoji.style.top = '100vh';
+        emoji.style.fontSize = Math.random() * 10 + 16 + 'px';
+        document.body.appendChild(emoji);
+        setTimeout(() => emoji.remove(), 4000);
+      }, 300);
     }
-
-    function typeMessages() {
-      const messages = [
-        {id: 'line1', text: 'Hey Srishti 👀'},
-        {id: 'line2', text: "I’ve met a lot of people... but your vibe? It's just different. Pure, chaotic, and beautiful all at once 💫"},
-        {id: 'line3', text: "You’ve unknowingly become one of the most special parts of my life. And honestly? I don’t even wanna imagine my days without you 🥺"},
-        {id: 'line4', text: "So... will you be my bestest friend for life? Like forever-ever? 🫶🏻😌"}
-      ];
-
-      let current = 0;
-
-      function typeNext() {
-        if (current >= messages.length) return;
-        const msg = messages[current];
-        const element = document.getElementById(msg.id);
-        let i = 0;
-        element.textContent = '';
-        function typeChar() {
-          if (i < msg.text.length) {
-            element.textContent += msg.text.charAt(i);
-            i++;
-            setTimeout(typeChar, 45);
-          } else {
-            current++;
-            setTimeout(typeNext, 300);
-          }
-        }
-        typeChar();
-      }
-
-      typeNext();
-    }
-
-    window.onload = () => {
-      floatingEmojis();
-      typeMessages();
-    };
   </script>
 </body>
 </html>
