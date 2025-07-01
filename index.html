@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>For You, Srishti 💘</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -17,7 +17,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
     }
     @keyframes gradient {
       0% { background-position: 0% 50%; }
@@ -44,24 +43,16 @@
       border-radius: 15px;
       margin: 15px 0;
     }
-    .caption {
-      font-size: 0.9em;
-      color: #888;
-      margin-top: -10px;
-      margin-bottom: 15px;
-    }
-    #textArea {
+    #textArea p {
       font-size: 1.1em;
       color: #555;
-      min-height: 3em;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
     .buttons {
       display: flex;
       justify-content: center;
       gap: 15px;
       margin-top: 10px;
-      flex-wrap: wrap;
     }
     button {
       padding: 10px 20px;
@@ -93,63 +84,28 @@
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
     }
-    .emoji {
-      position: absolute;
-      font-size: 1.2rem;
-      animation: float 6s infinite ease-in-out;
-      opacity: 0.6;
-    }
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-      100% { transform: translateY(0); }
-    }
   </style>
 </head>
 <body>
   <div class="container" id="mainBox">
     <h1>For You, Srishti 💘</h1>
     <img class="gif" src="sakuta-mai.gif" alt="confession gif" />
-    <div class="caption">(This moment reminds me of us 🫶🏻)</div>
-    <div id="textArea">Hey Srishti... I’ve been meaning to tell you something 💭</div>
+    <div id="textArea"></div>
     <div class="buttons">
       <button id="yesBtn" onclick="sayYes()">Of courseee 🤝</button>
       <button id="noBtn" onclick="moveNo()">No 🥺</button>
     </div>
   </div>
 
+  <!-- Audio -->
   <audio id="bgMusic" src="raatan.mp3" preload="auto"></audio>
+
+  <!-- Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
   <script>
-    const textArea = document.getElementById("textArea");
-    const messages = [
-      "Hey Srishti... I’ve been meaning to tell you something 💭",
-      "You’re like comfort, chaos & charm wrapped in one 🧸✨",
-      "You’ve unknowingly become the best part of my day 😌",
-      "Will you be my bestest friend for life? 🫶🏻"
-    ];
-
-    let i = 0, j = 0;
-    function typeLine() {
-      if (i < messages.length) {
-        if (j < messages[i].length) {
-          textArea.textContent += messages[i].charAt(j);
-          j++;
-          setTimeout(typeLine, 40);
-        } else {
-          i++;
-          j = 0;
-          setTimeout(() => {
-            textArea.textContent = "";
-            typeLine();
-          }, 1200);
-        }
-      }
-    }
-    typeLine();
-
     const noBtn = document.getElementById("noBtn");
+
     function moveNo() {
       const container = document.querySelector('.container');
       const maxX = container.offsetWidth - noBtn.offsetWidth - 30;
@@ -166,15 +122,7 @@
       music.play().catch(() => {
         const btn = document.createElement("button");
         btn.textContent = "🔊 Tap to play music";
-        btn.style.position = "fixed";
-        btn.style.bottom = "20px";
-        btn.style.left = "50%";
-        btn.style.transform = "translateX(-50%)";
-        btn.style.padding = "12px 20px";
-        btn.style.border = "none";
-        btn.style.background = "#ff4081";
-        btn.style.color = "white";
-        btn.style.borderRadius = "25px";
+        btn.style = "position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:12px 20px;background:#ff4081;color:white;border:none;border-radius:25px;font-weight:600;z-index:999;";
         btn.onclick = () => {
           music.play();
           btn.remove();
@@ -182,34 +130,58 @@
         document.body.appendChild(btn);
       });
 
-      confetti({ particleCount: 250, spread: 70, origin: { y: 0.6 } });
+      confetti({ particleCount: 300, spread: 100, origin: { y: 0.6 } });
 
       document.body.innerHTML = `
         <div class="container fade-in" style="background:#fce4ec;">
-          <h1>Yesssss 💖</h1>
+          <h1>Yessss! 🤗</h1>
           <img class="gif" src="anime-hug.gif" alt="hug gif" />
           <p>Srishti, you're now officially my forever best friend 🫶🏻</p>
           <p>No matter what happens, you’ll always have me — hype squad, safe space, secret keeper 💌</p>
           <button onclick="window.open('https://www.instagram.com/vrd.cfg?igsh=MWI0dm0xcDI4ZzVueA==', '_blank')" style="margin-top: 20px; background: #e1306c; padding: 12px 20px; border: none; color: white; border-radius: 30px; font-weight: bold;">
             Take me to Instagram 💗
           </button>
-        </div>`;
+        </div>
+      `;
     }
 
-    // Floating cute emoji particles
-    const emojis = ["🫶🏻", "💖", "✨", "🌸", "🥺"];
-    function spawnEmojis() {
-      for (let i = 0; i < 20; i++) {
-        const emoji = document.createElement('div');
-        emoji.className = 'emoji';
-        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        emoji.style.left = Math.random() * 100 + 'vw';
-        emoji.style.top = Math.random() * 100 + 'vh';
-        emoji.style.animationDuration = (Math.random() * 5 + 5) + 's';
-        document.body.appendChild(emoji);
+    const messages = [
+      "Hey Srishti 👀",
+      "I’ve met a lot of people... but your vibe? It's just different 💫",
+      "You’ve unknowingly become one of the most special parts of my life 🥺",
+      "So... will you be my bestest friend for life? Like forever-ever? 🫶🏻"
+    ];
+
+    const textArea = document.getElementById("textArea");
+    let current = 0;
+
+    function typeLine(msg, callback) {
+      let i = 0;
+      const p = document.createElement("p");
+      textArea.appendChild(p);
+
+      function typeChar() {
+        if (i < msg.length) {
+          p.textContent += msg.charAt(i);
+          i++;
+          setTimeout(typeChar, 40);
+        } else {
+          callback();
+        }
       }
+
+      typeChar();
     }
-    spawnEmojis();
+
+    function startTyping() {
+      if (current >= messages.length) return;
+      typeLine(messages[current], () => {
+        current++;
+        setTimeout(startTyping, 300);
+      });
+    }
+
+    window.onload = startTyping;
   </script>
 </body>
 </html>
