@@ -5,23 +5,30 @@
   <title>For You, Srishti 💫</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    body {
+    html, body {
       margin: 0;
-      padding: 20px;
+      padding: 0;
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(-45deg, #e3f2fd, #fce4ec, #f3e5f5, #e1f5fe);
       background-size: 400% 400%;
       animation: gradientBG 10s ease infinite;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+      height: 100%;
       overflow: hidden;
+      cursor: url('https://cur.cursors-4u.net/cursors/cur-13/cur1147.cur'), auto;
     }@keyframes gradientBG {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+.outer-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .container {
@@ -29,9 +36,29 @@
   border-radius: 20px;
   box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
   max-width: 460px;
-  width: 100%;
-  padding: 30px;
+  width: 90%;
+  padding: 20px;
   text-align: center;
+  position: relative;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding-bottom: 100px;
+  scroll-behavior: smooth;
+}
+
+.love-meter {
+  width: 100%;
+  background: #f3f3f3;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 12px;
+  margin-bottom: 15px;
+}
+.love-meter-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #ff80ab, #f06292);
+  transition: width 0.3s;
 }
 
 h1 {
@@ -71,14 +98,19 @@ p {
 
 .buttons {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
   position: relative;
+  z-index: 10;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0,0,0,0.05);
 }
 
 button {
   background: #42a5f5;
   border: none;
   padding: 12px 25px;
-  margin: 0 10px;
   font-size: 1.1em;
   border-radius: 30px;
   cursor: pointer;
@@ -114,108 +146,164 @@ button:hover {
   100% { transform: translateY(-100vh) rotate(360deg); }
 }
 
+.scroll-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  animation: bounce 1.5s infinite;
+  opacity: 0.6;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+.secret-heart {
+  position: absolute;
+  font-size: 24px;
+  cursor: pointer;
+  animation: floatEmoji 12s linear infinite;
+}
+
   </style>
 </head>
-<body>  <div class="container" id="confessBox">
+<body>
+<div class="outer-wrapper">
+  <div class="container" id="confessBox">
     <h1>For You, Srishti 💫</h1>
+    <div class="love-meter"><div id="loveBar" class="love-meter-bar"></div></div>
     <div class="gif-frame">
       <img class="gif" src="sakuta-mai.gif" alt="Gif">
       <div class="caption">that look when i realized you're my fav person 💌</div>
-    </div><p id="line1"></p>
-<p id="line2"></p>
-<p id="line3"></p>
-<p id="line4"></p>
+    </div>
+    <p id="line1"></p>
+    <p id="line2"></p>
+    <p id="line3"></p>
+    <p id="line4"></p>
+    <div class="buttons">
+      <button onclick="sayYes()">Of courseee 🤝</button>
+      <button id="noBtn" onclick="handleNo(event)">No 🥺</button>
+    </div>
+    <div class="scroll-indicator">⬇️</div>
+  </div>
+</div><!-- Secret hearts --><div class="secret-heart" style="top: 20%; left: 20%;" onclick="unlockSecret(this)">💖</div>
+<div class="secret-heart" style="top: 40%; left: 60%;" onclick="unlockSecret(this)">💖</div>
+<div class="secret-heart" style="top: 60%; left: 35%;" onclick="unlockSecret(this)">💖</div><script>
+  let noCount = 0;
+  let secretCount = 0;
 
-<div class="buttons">
-  <button onclick="sayYes()">Of courseee 🤝</button>
-  <button id="noBtn" onclick="handleNo(event)">No 🥺</button>
-</div>
-
-  </div>  <script>
-    const typeSound = new Audio('type.mp3');
-    const clickSound = new Audio('click.mp3');
-    const bgMusic = new Audio('raatan.mp3');
-    bgMusic.loop = true;
-
-    function sayYes() {
-      clickSound.play();
-      bgMusic.play();
-
-      document.body.innerHTML = `
-        <div class="container fade-in" style="background:#e8f5fe;">
-          <h1>Yessss! 💙</h1>
-          <div class="gif-frame">
-            <img class="gif" src="anime-hug.gif" alt="Anime hug gif" />
-            <div class="caption">locked in forever 🤝💗</div>
-          </div>
-          <p>Srishti, you're now officially my forever best friend 🫶🏻</p>
-          <p>No matter what happens, you'll always have me — hype squad, safe space, and secret keeper 💌</p>
-          <button onclick="window.open('https://www.instagram.com/vrd.cfg?igsh=MWI0dm0xcDI4ZzVueA==', '_blank')" style="margin-top: 20px; background: #e1306c;">
-            Take me to Instagram 💗
-          </button>
+  function sayYes() {
+    triggerConfetti();
+    document.body.innerHTML = `
+      <div class="container fade-in" style="background:#e8f5fe;">
+        <h1>Yessss! 💙</h1>
+        <div class="gif-frame">
+          <img class="gif" src="anime-hug.gif" alt="Anime hug gif" />
+          <div class="caption">locked in forever 🤝💗</div>
         </div>
-      `;
-    }
+        <p>Srishti, you're now officially my forever best friend 🫶🏻</p>
+        <p>No matter what happens, you'll always have me — hype squad, safe space, and secret keeper 💌</p>
+        <button onclick="window.open('https://www.instagram.com/vrd.cfg?igsh=MWI0dm0xcDI4ZzVueA==', '_blank')" style="margin-top: 20px; background: #e1306c;">
+          Take me to Instagram 💗
+        </button>
+        <p style="margin-top:30px; font-style:italic; color:#777">Now that you’re mine forever… get ready for a life full of memes, care, and chaos 😈💗</p>
+      </div>
+    `;
+  }
 
-    function handleNo(e) {
-      clickSound.play();
-      const noBtn = document.getElementById("noBtn");
-      const container = document.querySelector('.container');
-      const maxX = container.clientWidth - noBtn.offsetWidth;
-      const maxY = container.clientHeight - noBtn.offsetHeight;
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
-      noBtn.style.position = 'absolute';
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top = `${y}px`;
+  function handleNo(e) {
+    const noBtn = document.getElementById("noBtn");
+    const container = document.querySelector('.container');
+    const maxX = container.clientWidth - noBtn.offsetWidth;
+    const maxY = container.clientHeight - noBtn.offsetHeight;
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top = `${y}px`;
+    noCount++;
+    if(noCount >= 3){
+      alert("Nice try. We both know you're stuck with me 😤🩷");
     }
+  }
 
-    function floatEmojis() {
-      const emojis = ['🌸','💖','🧸','✨','🥺','🎀'];
-      for (let i = 0; i < 25; i++) {
-        const emoji = document.createElement('div');
-        emoji.className = 'emoji-float';
-        emoji.style.left = Math.random() * 100 + 'vw';
-        emoji.style.animationDuration = (8 + Math.random() * 4) + 's';
-        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        document.body.appendChild(emoji);
+  function triggerConfetti() {
+    for (let i = 0; i < 100; i++) {
+      const conf = document.createElement('div');
+      conf.textContent = ['💖','✨','🌸'][Math.floor(Math.random()*3)];
+      conf.className = 'emoji-float';
+      conf.style.left = Math.random()*100 + 'vw';
+      conf.style.fontSize = (16 + Math.random()*14) + 'px';
+      conf.style.animationDuration = (4 + Math.random()*3)+'s';
+      document.body.appendChild(conf);
+      setTimeout(() => conf.remove(), 7000);
+    }
+  }
+
+  function unlockSecret(el){
+    el.remove();
+    secretCount++;
+    if(secretCount === 3){
+      alert("💌 You found the hidden message!\nThis page was made in love, stitched in code, and filled with pieces of my heart just for you, Srishti 🩷");
+    }
+  }
+
+  function typeMessage(id, text, callback) {
+    const el = document.getElementById(id);
+    let i = 0;
+    const total = text.length;
+    el.textContent = '';
+    function type() {
+      if (i < total) {
+        el.textContent += text.charAt(i);
+        i++;
+        updateLoveBar(i / total);
+        setTimeout(type, 60);
+      } else if (callback) callback();
+    }
+    type();
+  }
+
+  function updateLoveBar(progress){
+    document.getElementById('loveBar').style.width = (progress*100)+'%';
+  }
+
+  function floatEmojis() {
+    const emojis = ['🌸','💖','🧸','✨','🥺','🎀'];
+    for (let i = 0; i < 25; i++) {
+      const emoji = document.createElement('div');
+      emoji.className = 'emoji-float';
+      emoji.style.left = Math.random() * 100 + 'vw';
+      emoji.style.animationDuration = (8 + Math.random() * 4) + 's';
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      document.body.appendChild(emoji);
+    }
+  }
+
+  window.onload = () => {
+    floatEmojis();
+    const messages = [
+      {id: 'line1', text: 'Hey Srishti 👀'},
+      {id: 'line2', text: "I’ve met a lot of people... but your vibe? It's just different. Pure, chaotic, and beautiful all at once 💫"},
+      {id: 'line3', text: "You’ve unknowingly become one of the most special parts of my life. And honestly? I don’t even wanna imagine my days without you 🥺"},
+      {id: 'line4', text: "So... will you be my bestest friend for life? Like forever-ever? 🫶🏻😌"}
+    ];
+    let current = 0;
+    function next() {
+      if (current < messages.length) {
+        typeMessage(messages[current].id, messages[current].text, () => {
+          current++;
+          if (current === messages.length) {
+            document.getElementById("confessBox").scrollTo({ top: document.getElementById("confessBox").scrollHeight, behavior: 'smooth' });
+          }
+          setTimeout(next, 500);
+        });
       }
     }
-
-    function typeMessage(id, text, callback) {
-      const el = document.getElementById(id);
-      let i = 0;
-      el.textContent = '';
-      function type() {
-        if (i < text.length) {
-          el.textContent += text.charAt(i);
-          typeSound.currentTime = 0;
-          typeSound.play();
-          i++;
-          setTimeout(type, 60);
-        } else if (callback) callback();
-      }
-      type();
-    }
-
-    window.onload = () => {
-      floatEmojis();
-      const messages = [
-        {id: 'line1', text: 'Hey Srishti 👀'},
-        {id: 'line2', text: "I’ve met a lot of people... but your vibe? It's just different. Pure, chaotic, and beautiful all at once 💫"},
-        {id: 'line3', text: "You’ve unknowingly become one of the most special parts of my life. And honestly? I don’t even wanna imagine my days without you 🥺"},
-        {id: 'line4', text: "So... will you be my bestest friend for life? Like forever-ever? 🫶🏻😌"}
-      ];
-      let current = 0;
-      function next() {
-        if (current < messages.length) {
-          typeMessage(messages[current].id, messages[current].text, () => {
-            current++;
-            setTimeout(next, 500);
-          });
-        }
-      }
-      next();
-    };
-  </script></body>
-</html>
+    next();
+  };
+</script></body>
+                                                                             </html>
