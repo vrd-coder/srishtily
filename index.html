@@ -170,15 +170,17 @@ button:hover {
   </div>
 </div><!-- Secret hearts --><div class="secret-heart" style="top: 20%; left: 20%;" onclick="unlockSecret(this)">💖</div>
 <div class="secret-heart" style="top: 40%; left: 60%;" onclick="unlockSecret(this)">💖</div>
-<div class="secret-heart" style="top: 60%; left: 35%;" onclick="unlockSecret(this)">💖</div><audio id="bgMusic" src="music.mp3"></audio>
+<div class="secret-heart" style="top: 60%; left: 35%;" onclick="unlockSecret(this)">💖</div><audio id="bgMusic" src="music.mp3" preload="auto"></audio>
 
 <script>
   let noCount = 0;
   let secretCount = 0;
 
   function sayYes() {
+    const music = document.getElementById("bgMusic");
+    music.currentTime = 0;
+    music.play();
     triggerConfetti();
-    document.getElementById("bgMusic").play();
     document.body.innerHTML = `
       <div class="container fade-in" style="background:#e8f5fe;">
         <h1>Yessss! 💙</h1>
