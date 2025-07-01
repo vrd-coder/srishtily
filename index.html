@@ -32,6 +32,7 @@
       width: 90%;
       max-width: 400px;
       position: relative;
+      overflow: hidden;
     }
     h1 {
       font-size: 1.9em;
@@ -43,10 +44,11 @@
       border-radius: 15px;
       margin: 15px 0;
     }
-    #textArea p {
+    #textArea {
       font-size: 1.1em;
       color: #555;
-      margin-bottom: 10px;
+      min-height: 3em;
+      margin-bottom: 20px;
     }
     .buttons {
       display: flex;
@@ -77,6 +79,16 @@
     #noBtn:hover {
       background: #64b5f6;
     }
+    @keyframes floatEmoji {
+      0% { transform: translateY(100vh); opacity: 0; }
+      100% { transform: translateY(-10vh); opacity: 1; }
+    }
+    .emoji {
+      position: fixed;
+      font-size: 2rem;
+      animation: floatEmoji 5s linear infinite;
+      pointer-events: none;
+    }
     .fade-in {
       animation: fadeIn 1s ease forwards;
     }
@@ -92,41 +104,67 @@
     <img class="gif" src="sakuta-mai.gif" alt="confession gif" />
     <div id="textArea"></div>
     <div class="buttons">
-      <button id="yesBtn">Of courseee 🤝</button>
+      <button id="yesBtn" onclick="sayYes()">Of courseee 🤝</button>
       <button id="noBtn" onclick="moveNo()">No 🥺</button>
     </div>
   </div>
 
-  <!-- Audio -->
   <audio id="bgMusic" src="raatan.mp3" preload="auto"></audio>
-
-  <!-- Confetti CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
   <script>
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-    const bgMusic = document.getElementById("bgMusic");
+    const text = "Hey Srishti... I’ve been meaning to tell you something 💭";
+    let i = 0;
 
-    yesBtn.onclick = () => {
-      // Play music only on user interaction
-      bgMusic.play().catch(() => {
-        const btn = document.createElement("button");
-        btn.textContent = "🔊 Tap to play music";
-        btn.style = "position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:12px 20px;background:#ff4081;color:white;border:none;border-radius:25px;font-weight:600;z-index:999;";
-        btn.onclick = () => {
-          bgMusic.play();
-          btn.remove();
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("textArea").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 40);
+      }
+    }
+    typeWriter();
+
+    const noBtn = document.getElementById("noBtn");
+
+    function moveNo() {
+      const container = document.querySelector('.container');
+      const maxX = container.offsetWidth - noBtn.offsetWidth - 20;
+      const maxY = container.offsetHeight - noBtn.offsetHeight - 20;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    function sayYes() {
+      const music = document.getElementById("bgMusic");
+
+      music.play().catch(() => {
+        const tapBtn = document.createElement("button");
+        tapBtn.textContent = "🔊 Tap to play music";
+        tapBtn.style.position = "fixed";
+        tapBtn.style.bottom = "20px";
+        tapBtn.style.left = "50%";
+        tapBtn.style.transform = "translateX(-50%)";
+        tapBtn.style.padding = "12px 20px";
+        tapBtn.style.border = "none";
+        tapBtn.style.background = "#ff4081";
+        tapBtn.style.color = "white";
+        tapBtn.style.borderRadius = "25px";
+        tapBtn.onclick = () => {
+          music.play();
+          tapBtn.remove();
         };
-        document.body.appendChild(btn);
+        document.body.appendChild(tapBtn);
       });
 
-      // Confetti
-      confetti({ particleCount: 250, spread: 120, origin: { y: 0.6 } });
+      confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
 
       document.body.innerHTML = `
         <div class="container fade-in" style="background:#fce4ec;">
-          <h1>Yessss! 🤗</h1>
+          <h1>Yessss! 🫂</h1>
           <img class="gif" src="anime-hug.gif" alt="hug gif" />
           <p>Srishti, you're now officially my forever best friend 🫶🏻</p>
           <p>No matter what happens, you’ll always have me — hype squad, safe space, secret keeper 💌</p>
@@ -135,55 +173,20 @@
           </button>
         </div>
       `;
-    };
 
-    function moveNo() {
-      const container = document.querySelector('.container');
-      const maxX = container.offsetWidth - noBtn.offsetWidth - 30;
-      const maxY = container.offsetHeight - noBtn.offsetHeight - 30;
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
-      noBtn.style.position = 'absolute';
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top = `${y}px`;
+      spawnEmojis();
+      setInterval(spawnEmojis, 1000);
     }
 
-    // Typing animation
-    const messages = [
-      "Hey Srishti 👀",
-      "I’ve met a lot of people... but your vibe? It's just different 💫",
-      "You’ve unknowingly become one of the most special parts of my life 🥺",
-      "So... will you be my bestest friend for life? Like forever-ever? 🫶🏻"
-    ];
-
-    const textArea = document.getElementById("textArea");
-    let current = 0;
-
-    function typeLine(msg, callback) {
-      let i = 0;
-      const p = document.createElement("p");
-      textArea.appendChild(p);
-      function typeChar() {
-        if (i < msg.length) {
-          p.textContent += msg.charAt(i);
-          i++;
-          setTimeout(typeChar, 40);
-        } else {
-          callback();
-        }
-      }
-      typeChar();
+    function spawnEmojis() {
+      const emoji = document.createElement("div");
+      emoji.className = "emoji";
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.animationDuration = (2 + Math.random() * 3) + "s";
+      emoji.textContent = "🫶🏻";
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 5000);
     }
-
-    function startTyping() {
-      if (current >= messages.length) return;
-      typeLine(messages[current], () => {
-        current++;
-        setTimeout(startTyping, 300);
-      });
-    }
-
-    window.onload = startTyping;
   </script>
 </body>
 </html>
